@@ -1,237 +1,576 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kashifa | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kashifa Zafar | Portfolio</title>
+    <!-- Font Awesome Icons & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --accent-color: #818cf8;
+            --border-color: #334155;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
 
-body{
-background:#f4f7fb;
-color:#333;
-}
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            --accent-color: #4f46e5;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
 
-header{
-background:linear-gradient(135deg,#4CAF50,#2196F3);
-color:white;
-padding:80px 20px;
-text-align:center;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s;
+        }
 
-header h1{
-font-size:48px;
-margin-bottom:10px;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
 
-header p{
-font-size:22px;
-}
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-.container{
-width:90%;
-max-width:1100px;
-margin:auto;
-}
+        [data-theme="light"] nav {
+            background: rgba(248, 250, 252, 0.8);
+        }
 
-section{
-background:white;
-margin:30px 0;
-padding:30px;
-border-radius:15px;
-box-shadow:0 8px 20px rgba(0,0,0,.1);
-transition:.3s;
-}
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-section:hover{
-transform:translateY(-5px);
-}
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
 
-h2{
-text-align:center;
-color:#2196F3;
-margin-bottom:20px;
-font-size:32px;
-}
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-.about{
-text-align:center;
-font-size:18px;
-line-height:1.8;
-}
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
 
-.skills{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-}
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            margin-top: 2rem;
+        }
 
-.skill{
-background:#2196F3;
-color:white;
-padding:12px 22px;
-border-radius:30px;
-font-weight:bold;
-}
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-.projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
+        .hero h3 {
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
 
-.card{
-background:#f9f9f9;
-padding:20px;
-border-radius:12px;
-border-left:5px solid #4CAF50;
-}
+        .typing-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
 
-.card h3{
-margin-bottom:10px;
-}
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
 
-.contact{
-text-align:center;
-font-size:18px;
-line-height:2;
-}
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+        }
 
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow);
+        }
 
-.btn{
-display:inline-block;
-margin-top:15px;
-padding:12px 25px;
-background:#4CAF50;
-color:white;
-text-decoration:none;
-border-radius:30px;
-transition:.3s;
-}
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 2px solid var(--accent-color);
+        }
 
-.btn:hover{
-background:#2e7d32;
-}
+        /* Container & Sections */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 5rem 2rem;
+        }
 
-@media(max-width:768px){
-header h1{
-font-size:36px;
-}
-header p{
-font-size:18px;
-}
-}
-</style>
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
 
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary-gradient);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        /* Project & Certifications */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--accent-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--border-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: 0.3s;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-gradient);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h3 {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header>
-<h1>Hi, I'm Kashifa 👋</h1>
-<p>BS Computer Science Student | Future Software Engineer</p>
-<a href="#contact" class="btn">Contact Me</a>
-</header>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">KZ</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="theme-toggle" id="themeToggle"><i class="fas opacity-100 fa-moon"></i></div>
+    </nav>
 
-<div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Kashifa Zafar</h1>
+        <h3>BS Computer Science Student</h3>
+        <p>I am a <span class="typing-text"></span></p>
+        <div class="btn-group">
+            <a href="Kashifa_Zafar_CV.pdf" download class="btn btn-primary"><i class="fas fa-download"></i> Download
+                CV</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Contact Me</a>
+        </div>
+    </section>
 
-<section>
-<h2>About Me</h2>
+    <div class="container">
 
-<p class="about">
-I am a BS Computer Science student passionate about software development,
-web development, and solving real-world problems through technology.
-I enjoy learning new programming languages and building practical projects.
-</p>
+        <!-- Stats Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-code-branch"></i>
+                <h3>1+</h3>
+                <p>Core Projects Built</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-award"></i>
+                <h3>2+</h3>
+                <p>Certifications Earned</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Python</h3>
+                <p>Currently Learning</p>
+            </div>
+        </div>
 
-</section>
+        <!-- About Me Section -->
+        <section id="about" style="margin-bottom: 5rem;">
+            <h2 class="section-title">About Me</h2>
+            <div
+                style="background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                <p style="margin-bottom: 1.5rem;">
+                    I am a BS Computer Science student with a strong interest in software development and web
+                    technologies. I enjoy learning new programming languages and building practical projects. I am
+                    continuously improving my technical skills and expanding my knowledge through hands-on learning.
+                </p>
+                <h4 style="margin-bottom: 0.5rem; color: var(--accent-color);">Career Objective</h4>
+                <p>
+                    I am currently looking for internship opportunities where I can apply my skills, gain practical
+                    experience, and grow as a software developer in a dynamic technical environment.
+                </p>
+            </div>
+        </section>
 
-<section>
+        <!-- Skills Section -->
+        <section id="skills" style="margin-bottom: 5rem;">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-info"><span>HTML5 / CSS3</span><span>90%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-info"><span>C++</span><span>80%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-info"><span>Java</span><span>75%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-info"><span>MySQL</span><span>75%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-info"><span>Laravel</span><span>70%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-info"><span>Git & GitHub</span><span>70%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 70%;"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-info"><span>Python (Learning)</span><span>50%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<h2>Skills</h2>
+        <!-- Projects Section -->
+        <section id="projects" style="margin-bottom: 5rem;">
+            <h2 class="section-title">Projects</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <i class="fas fa-folder-open"
+                        style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>AQDesk – Question & Answer Platform</h3>
+                    <p>A web-based platform that allows students to ask questions and receive answers from instructors
+                        and professionals, featuring secure authentication, question management, answer posting, and an
+                        admin dashboard.</p>
+                    <div class="tech-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Laravel</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="skills">
+        <!-- Certifications Section -->
+        <section id="certifications" style="margin-bottom: 5rem;">
+            <h2 class="section-title">Certifications</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <i class="fas fa-certificate"
+                        style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Introduction to Networks</h3>
+                    <p style="color: var(--text-muted);">Cisco Networking Academy</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-certificate"
+                        style="font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem;"></i>
+                    <h3>Microsoft Office Course</h3>
+                    <p style="color: var(--text-muted);">Professional Certification</p>
+                </div>
+            </div>
+        </section>
 
-<div class="skill">HTML</div>
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-container">
+                <h3>Get In Touch</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Feel free to reach out for internship
+                    opportunities or collaborations!</p>
+                <div class="social-links">
+                    <a href="mailto:iawanzadii2@gmail.com" class="social-icon" title="Email"><i
+                            class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/kashifa400" target="_blank" class="social-icon" title="GitHub"><i
+                            class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </section>
 
-<div class="skill">CSS</div>
+    </div>
 
-<div class="skill">Java</div>
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
 
-<div class="skill">Python</div>
+    <!-- JavaScript Script -->
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = themeToggleBtn.querySelector('i');
 
-<div class="skill">C++</div>
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.className = 'fas fa-moon';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fas fa-sun';
+            }
+        });
 
-<div class="skill">MySQL</div>
+        // Typing Effect Logic
+        const words = ["Software Developer", "Web Developer", "Python Learner"];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
 
-<div class="skill">Laravel</div>
+        (function type() {
+            if (count === words.length) {
+                count = 0;
+            }
+            currentText = words[count];
+            letter = currentText.slice(0, ++index);
 
-<div class="skill">GitHub</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Projects</h2>
-
-<div class="projects">
-
-<div class="card">
-<h3>AQDesk</h3>
-<p>Question & Answer platform developed for students using modern web technologies.</p>
-</div>
-
-<div class="card">
-<h3>Portfolio Website</h3>
-<p>A responsive personal portfolio website built using HTML and CSS.</p>
-</div>
-
-<div class="card">
-<h3>Coming Soon...</h3>
-<p>More exciting software projects will be added soon.</p>
-</div>
-
-</div>
-
-</section>
-
-<section id="contact">
-
-<h2>Contact</h2>
-
-<div class="contact">
-
-<p>📧 <strong>Email:</strong> iawanzadii2@gmail.com</p>
-
-<p>💻 <strong>GitHub:</strong> github.com/kashifa400</p>
-
-</div>
-
-</section>
-
-</div>
-
-<footer>
-
-<p>© 2026 Kashifa | All Rights Reserved</p>
-
-</footer>
-
+            document.querySelector(".typing-text").textContent = letter;
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000); // Pause on complete word
+            } else {
+                setTimeout(type, 100);
+            }
+        })();
+    </script>
 </body>
+
 </html>
